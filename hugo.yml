@@ -1,0 +1,61 @@
+title: RW 文档
+baseURL: https://churen-biz.github.io/rw/
+defaultContentLanguage: zh
+enableGitInfo: true
+
+languages:
+  zh:
+    label: 简体中文
+    locale: zh-CN
+    weight: 1
+    title: RW 文档
+    params:
+      description: 清晰、可搜索、易维护的项目文档
+    menus:
+      main:
+        - identifier: docs
+          name: 文档
+          pageRef: /docs
+          weight: 20
+          params:
+            icon: fa-solid fa-book
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    parser:
+      attribute:
+        block: true
+      wrapStandAloneImageWithinParagraph: false
+  highlight:
+    noClasses: false
+
+params:
+  offline_search: true
+  github_repo: https://github.com/churen-biz/rw
+  copyright:
+    authors: '[churen-biz](https://github.com/churen-biz)'
+    from_year: 2026
+  ui:
+    dark_mode: true
+    sidebar_menu_foldable: true
+    sidebar_root_enabled: true
+    sidebar_root_menu: true
+    section_index: cards
+    backlinks: true
+    page_context_menu:
+      enable: true
+      assistant_links: false
+
+outputs:
+  home: [HTML, markdown, LLMS]
+  page: [HTML, markdown]
+  section: [HTML, RSS, print, markdown]
+
+module:
+  imports:
+    - path: github.com/pgsty/oink
+  hugoVersion:
+    extended: true
+    min: '0.160.1'
