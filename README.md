@@ -38,3 +38,24 @@ hugo --gc --minify --printPathWarnings --panicOnWarning
 ```
 
 推送到 `main` 后，`.github/workflows/pages.yml` 会构建并发布 `public/`。首次发布前，在 GitHub 仓库中打开 **Settings → Pages → Build and deployment**，将 **Source** 设为 **GitHub Actions**。
+
+也可以使用仓库内的一键发布脚本。首次使用先登录 GitHub CLI：
+
+```bash
+gh auth login
+./scripts/publish-docs.sh --install --commit "Publish docs" --make-public
+```
+
+日常发布已有提交：
+
+```bash
+./scripts/publish-docs.sh
+```
+
+只做环境与文档检查，不访问或修改 GitHub：
+
+```bash
+./scripts/publish-docs.sh --check-only
+```
+
+运行 `./scripts/publish-docs.sh --help` 可查看所有参数与安全保护。

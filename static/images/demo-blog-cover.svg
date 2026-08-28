@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">RW Blog</title>
+  <desc id="desc">紫色渐变背景上的 RW Blog 字样</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#312e81"/>
+      <stop offset="0.55" stop-color="#6d28d9"/>
+      <stop offset="1" stop-color="#c026d3"/>
+    </linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" rx="32" fill="url(#bg)"/>
+  <rect width="1200" height="630" rx="32" fill="url(#grid)"/>
+  <circle cx="1000" cy="120" r="210" fill="#fff" opacity=".08"/>
+  <text x="96" y="285" fill="#fff" font-family="ui-sans-serif, system-ui, sans-serif" font-size="96" font-weight="700">RW Blog</text>
+  <text x="102" y="365" fill="#ede9fe" font-family="ui-sans-serif, system-ui, sans-serif" font-size="36">Ideas · Notes · Releases</text>
+</svg>

@@ -10,3 +10,6 @@ description: 清晰、可搜索、易维护的项目文档。
 - [开始使用](/docs/getting-started/)
 - [写作指南](/docs/writing/)
 - [部署说明](/docs/deployment/)
+- [教程书籍](/book/)
+- [案例展示](/case/)
+- [博客文章](/blog/)

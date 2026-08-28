@@ -19,6 +19,24 @@ languages:
           weight: 20
           params:
             icon: fa-solid fa-book
+        - identifier: book
+          name: 教程
+          pageRef: /book
+          weight: 30
+          params:
+            icon: fa-solid fa-book-open
+        - identifier: case
+          name: 案例
+          pageRef: /case
+          weight: 40
+          params:
+            icon: fa-solid fa-layer-group
+        - identifier: blog
+          name: 博客
+          pageRef: /blog
+          weight: 50
+          params:
+            icon: fa-solid fa-blog
 
 markup:
   goldmark:
@@ -28,25 +46,55 @@ markup:
       attribute:
         block: true
       wrapStandAloneImageWithinParagraph: false
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block: [['\[', '\]'], ['$$', '$$']]
+          inline: [['\(', '\)']]
   highlight:
     noClasses: false
 
 params:
   offline_search: true
+  offline_search_on_serve: true
   github_repo: https://github.com/churen-biz/rw
+  version: v1.0.0
+  version_menu: v1.0.0
+  version_menu_pagelinks: false
+  versions:
+    - name: '**版本示例**'
+    - version: v1.0.0
+      kind: latest
+      url: https://churen-biz.github.io/rw/
+    - name: '---'
+    - name: v0.9.0（历史版本占位）
   copyright:
     authors: '[churen-biz](https://github.com/churen-biz)'
     from_year: 2026
   ui:
     dark_mode: true
+    shell_types: [docs, book, blog, swagger]
     sidebar_menu_foldable: true
     sidebar_root_enabled: true
     sidebar_root_menu: true
     section_index: cards
+    blog_index: cards
+    blog_index_toggle: true
+    blog_index_columns: 3
+    sidebar_icon_policy: groups
+    sidebar_headings: 3
+    book_draft_banner: true
     backlinks: true
     page_context_menu:
       enable: true
       assistant_links: false
+
+taxonomies:
+  category: categories
+  tag: tags
+  author: authors
+  series: series
 
 outputs:
   home: [HTML, markdown, LLMS]
