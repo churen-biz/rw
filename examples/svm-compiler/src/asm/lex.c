@@ -83,6 +83,24 @@ bool sc_lexer_next(ScLexer *lex, ScToken *out, ScError *err) {
         return true;
     }
 
+    if (c == '(' || c == ')' || c == ',' || c == ':') {
+        advance(lex);
+        out->span = span_at(lex, line, column);
+        out->text = lex->src + (lex->pos - 1);
+        out->length = 1;
+        out->int_value = 0;
+        if (c == '(') {
+            out->kind = SC_TOK_LPAREN;
+        } else if (c == ')') {
+            out->kind = SC_TOK_RPAREN;
+        } else if (c == ',') {
+            out->kind = SC_TOK_COMMA;
+        } else {
+            out->kind = SC_TOK_COLON;
+        }
+        return true;
+    }
+
     if (c == '.' || isalpha((unsigned char)c) || c == '_') {
         const char *start = lex->src + lex->pos;
         advance(lex);

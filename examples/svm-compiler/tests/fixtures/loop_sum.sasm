@@ -1,0 +1,24 @@
+# sum 1..5 via a counting loop → 15
+.func main -> i32
+  const_i32 0
+  store_local 0
+  const_i32 1
+  store_local 1
+loop:
+  load_local 1
+  const_i32 5
+  i32_le
+  jump_if_false done
+  load_local 0
+  load_local 1
+  i32_add
+  store_local 0
+  load_local 1
+  const_i32 1
+  i32_add
+  store_local 1
+  jump loop
+done:
+  load_local 0
+  return
+.end

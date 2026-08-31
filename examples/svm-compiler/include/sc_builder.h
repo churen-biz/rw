@@ -11,7 +11,16 @@ typedef struct ScBuilder ScBuilder;
 
 ScBuilder *sc_builder_create(ScArena *arena);
 
-bool sc_builder_begin_func(ScBuilder *b, const char *name, ScError *err);
+bool sc_builder_begin_func(
+    ScBuilder *b,
+    const char *name,
+    const SvmType *param_types,
+    uint32_t param_count,
+    SvmType result_type,
+    ScError *err
+);
+
+bool sc_builder_define_label(ScBuilder *b, const char *name, ScError *err);
 
 bool sc_builder_emit(
     ScBuilder *b,
@@ -20,6 +29,15 @@ bool sc_builder_emit(
     int32_t operand2,
     ScError *err
 );
+
+bool sc_builder_emit_jump(
+    ScBuilder *b,
+    SvmOpcode op,
+    const char *label,
+    ScError *err
+);
+
+bool sc_builder_emit_call(ScBuilder *b, const char *func_name, ScError *err);
 
 bool sc_builder_end_func(ScBuilder *b, ScError *err);
 

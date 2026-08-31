@@ -13,7 +13,11 @@ typedef enum {
     SC_TOK_END,
     SC_TOK_ARROW,
     SC_TOK_IDENT,
-    SC_TOK_INT
+    SC_TOK_INT,
+    SC_TOK_LPAREN,
+    SC_TOK_RPAREN,
+    SC_TOK_COMMA,
+    SC_TOK_COLON
 } ScTokenKind;
 
 typedef struct {

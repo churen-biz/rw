@@ -31,10 +31,15 @@ $(BUILD_DIR)/test-asm: tests/test-asm.c $(LIB_SRC) $(REF_SRC) | $(BUILD_DIR)
 test: all
 	$(BUILD_DIR)/test-asm
 	./scripts/run-answer.sh
+	./scripts/run-factorial.sh
 
 demo: $(BUILD_DIR)/svm-as stack-vm-deps
 	$(BUILD_DIR)/svm-as tests/fixtures/answer.sasm $(BUILD_DIR)/answer.svm
 	$(SVM_RUN) $(BUILD_DIR)/answer.svm
+
+demo-factorial: $(BUILD_DIR)/svm-as stack-vm-deps
+	$(BUILD_DIR)/svm-as tests/fixtures/factorial.sasm $(BUILD_DIR)/factorial.svm
+	$(SVM_RUN) $(BUILD_DIR)/factorial.svm 1
 
 clean:
 	rm -rf $(BUILD_DIR)

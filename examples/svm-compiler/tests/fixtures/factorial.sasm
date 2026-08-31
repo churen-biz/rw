@@ -1,0 +1,22 @@
+.func factorial(n: i32) -> i32
+  load_local 0
+  const_i32 1
+  i32_le
+  jump_if_false body
+  const_i32 1
+  return
+body:
+  load_local 0
+  load_local 0
+  const_i32 1
+  i32_sub
+  call factorial
+  i32_mul
+  return
+.end
+
+.func main -> i32
+  const_i32 5
+  call factorial
+  return
+.end
