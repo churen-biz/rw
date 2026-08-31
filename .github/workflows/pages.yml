@@ -51,6 +51,9 @@ jobs:
       - name: Download Hugo module
         run: go mod download github.com/pgsty/oink
 
+      - name: Build and test Stack VM tutorial
+        run: make -C examples/stack-vm clean test demo
+
       - name: Build site
         run: |
           hugo --cleanDestinationDir --gc --minify --environment production \

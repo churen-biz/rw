@@ -179,6 +179,7 @@ stage_docs_site() {
     assets
     content
     data
+    examples
     go.mod
     go.sum
     hugo.yml
@@ -266,6 +267,7 @@ ensure_command go go
 ensure_command hugo hugo
 ensure_command gh gh
 ensure_command curl curl
+ensure_command cc llvm
 check_go
 check_hugo
 ok "Git $(git --version | awk '{print $3}')"
@@ -278,6 +280,7 @@ ok "GitHub CLI $(gh --version | awk 'NR == 1 {print $3}')"
 
 log "检查文档并执行严格生产构建"
 git diff --check
+make -C examples/stack-vm clean test demo
 go mod download github.com/pgsty/oink
 hugo --cleanDestinationDir --gc --minify --environment production \
   --printPathWarnings --panicOnWarning
