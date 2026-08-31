@@ -33,6 +33,8 @@ Java 风格对象可降低为 `new_object/get_field/set_field`，方法调用降
 
 VM 不需要为每种源语言复制一套指令。前端负责把语法和语言特有规则转换成少量正交原语，VM 负责验证、执行、内存、调度和隔离。
 
+更完整的「源码 → 指令」路径见配套教程 [《从文本汇编到 Mini 编译器》](/book/svm-compiler/)：先手写 `.sasm`，再用 Mini 与 IR 生成同一套 opcode。
+
 ## 3. 最关键的端到端不变量 {#invariants}
 
 最终实现维持以下顺序：
