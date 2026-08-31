@@ -30,6 +30,7 @@ $(BUILD_DIR)/test-asm: tests/test-asm.c $(LIB_SRC) $(REF_SRC) | $(BUILD_DIR)
 
 test: all
 	$(BUILD_DIR)/test-asm
+	./scripts/run-answer.sh
 
 demo: $(BUILD_DIR)/svm-as stack-vm-deps
 	$(BUILD_DIR)/svm-as tests/fixtures/answer.sasm $(BUILD_DIR)/answer.svm
