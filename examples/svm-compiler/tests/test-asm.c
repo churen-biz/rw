@@ -1,5 +1,6 @@
 #include "module.h"
 #include "sc_arena.h"
+#include "sc_asm.h"
 #include "sc_builder.h"
 #include "sc_diag.h"
 #include "svm.h"
@@ -38,6 +39,14 @@ static SvmLimits test_limits(void) {
     };
 }
 
+static void assert_runs_to_42(const SvmModule *module) {
+    SvmValue result;
+    SvmError runtime = {0};
+    assert(svm_execute(module, 0, NULL, 0, test_limits(), &result, &runtime));
+    assert(result.type == SVM_TYPE_I32);
+    assert(result.as.i32 == 42);
+}
+
 static void test_builder_answer(void) {
     ScArena *arena = sc_arena_create();
     ScBuilder *b = sc_builder_create(arena);
@@ -50,20 +59,42 @@ static void test_builder_answer(void) {
     assert(sc_builder_end_func(b, &err));
     SvmModule module;
     assert(sc_builder_finish(b, &module, &err));
-
-    SvmValue result;
-    SvmError runtime = {0};
-    assert(svm_execute(&module, 0, NULL, 0, test_limits(), &result, &runtime));
-    assert(result.type == SVM_TYPE_I32);
-    assert(result.as.i32 == 42);
+    assert_runs_to_42(&module);
     sc_arena_destroy(arena);
     puts("ok builder");
+}
+
+static void test_assemble_answer(void) {
+    ScArena *arena = sc_arena_create();
+    SvmModule module;
+    ScError err = {0};
+    assert(sc_assemble_file("tests/fixtures/answer.sasm", arena, &module, &err));
+    assert_runs_to_42(&module);
+    sc_arena_destroy(arena);
+    puts("ok assemble answer");
+}
+
+static void test_assemble_bad_opcode(void) {
+    ScArena *arena = sc_arena_create();
+    SvmModule module;
+    ScError err = {0};
+    assert(!sc_assemble_file(
+        "tests/fixtures/bad-opcode.sasm", arena, &module, &err
+    ));
+    assert(
+        strstr(err.message, "not_an_opcode") != NULL ||
+        strstr(err.message, "unknown") != NULL
+    );
+    sc_arena_destroy(arena);
+    puts("ok assemble reject");
 }
 
 int main(void) {
     test_arena_strdup();
     test_error_format();
     test_builder_answer();
+    test_assemble_answer();
+    test_assemble_bad_opcode();
     puts("ok diag/arena");
     return 0;
 }

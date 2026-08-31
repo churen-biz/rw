@@ -1,7 +1,7 @@
 CC ?= cc
 STACK_VM := ../stack-vm
 REF := $(STACK_VM)/reference
-CPPFLAGS ?= -Iinclude -I$(REF)
+CPPFLAGS ?= -Iinclude -Isrc/asm -I$(REF)
 CFLAGS ?= -std=c11 -Wall -Wextra -Werror -pedantic -g
 BUILD_DIR := build
 SVM_RUN := $(STACK_VM)/build/svm-run
@@ -30,7 +30,6 @@ $(BUILD_DIR)/test-asm: tests/test-asm.c $(LIB_SRC) $(REF_SRC) | $(BUILD_DIR)
 
 test: all
 	$(BUILD_DIR)/test-asm
-	./scripts/run-answer.sh
 
 demo: $(BUILD_DIR)/svm-as stack-vm-deps
 	$(BUILD_DIR)/svm-as tests/fixtures/answer.sasm $(BUILD_DIR)/answer.svm
