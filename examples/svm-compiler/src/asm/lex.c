@@ -83,7 +83,7 @@ bool sc_lexer_next(ScLexer *lex, ScToken *out, ScError *err) {
         return true;
     }
 
-    if (c == '(' || c == ')' || c == ',' || c == ':') {
+    if (c == '(' || c == ')' || c == ',' || c == ':' || c == '{' || c == '}') {
         advance(lex);
         out->span = span_at(lex, line, column);
         out->text = lex->src + (lex->pos - 1);
@@ -95,8 +95,12 @@ bool sc_lexer_next(ScLexer *lex, ScToken *out, ScError *err) {
             out->kind = SC_TOK_RPAREN;
         } else if (c == ',') {
             out->kind = SC_TOK_COMMA;
-        } else {
+        } else if (c == ':') {
             out->kind = SC_TOK_COLON;
+        } else if (c == '{') {
+            out->kind = SC_TOK_LBRACE;
+        } else {
+            out->kind = SC_TOK_RBRACE;
         }
         return true;
     }
@@ -116,6 +120,14 @@ bool sc_lexer_next(ScLexer *lex, ScToken *out, ScError *err) {
             out->kind = SC_TOK_FUNC;
         } else if (length == 4 && strncmp(start, ".end", 4) == 0) {
             out->kind = SC_TOK_END;
+        } else if (length == 5 && strncmp(start, ".type", 5) == 0) {
+            out->kind = SC_TOK_TYPE;
+        } else if (length == 7 && strncmp(start, ".import", 7) == 0) {
+            out->kind = SC_TOK_IMPORT;
+        } else if (length == 8 && strncmp(start, ".handler", 8) == 0) {
+            out->kind = SC_TOK_HANDLER;
+        } else if (length == 9 && strncmp(start, ".captures", 9) == 0) {
+            out->kind = SC_TOK_CAPTURES;
         } else {
             out->kind = SC_TOK_IDENT;
         }

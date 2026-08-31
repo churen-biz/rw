@@ -1,0 +1,6 @@
+.func main -> i32
+  const_true
+  const_i32 1
+  i32_add
+  return
+.end

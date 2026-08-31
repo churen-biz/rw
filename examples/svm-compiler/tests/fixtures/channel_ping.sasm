@@ -1,0 +1,18 @@
+.func producer(ch: channel) -> void
+  load_local 0
+  const_i32 42
+  channel_send i32
+  return
+.end
+
+.func main -> i32
+  const_i32 1
+  channel_new i32
+  store_local 0
+  load_local 0
+  task_spawn producer
+  pop
+  load_local 0
+  channel_recv i32
+  return
+.end

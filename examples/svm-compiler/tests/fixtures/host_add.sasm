@@ -1,0 +1,8 @@
+.import math add(a: i32, b: i32) -> i32
+
+.func main -> i32
+  const_i32 2
+  const_i32 3
+  host_call math add
+  return
+.end

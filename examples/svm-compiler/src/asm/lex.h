@@ -11,13 +11,19 @@ typedef enum {
     SC_TOK_EOF,
     SC_TOK_FUNC,
     SC_TOK_END,
+    SC_TOK_TYPE,
+    SC_TOK_IMPORT,
+    SC_TOK_HANDLER,
+    SC_TOK_CAPTURES,
     SC_TOK_ARROW,
     SC_TOK_IDENT,
     SC_TOK_INT,
     SC_TOK_LPAREN,
     SC_TOK_RPAREN,
     SC_TOK_COMMA,
-    SC_TOK_COLON
+    SC_TOK_COLON,
+    SC_TOK_LBRACE,
+    SC_TOK_RBRACE
 } ScTokenKind;
 
 typedef struct {

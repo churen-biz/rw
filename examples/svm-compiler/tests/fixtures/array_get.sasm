@@ -1,0 +1,11 @@
+.func main -> i32
+  const_i32 3
+  new_array i32
+  dup
+  const_i32 1
+  const_i32 7
+  array_set i32
+  const_i32 1
+  array_get i32
+  return
+.end

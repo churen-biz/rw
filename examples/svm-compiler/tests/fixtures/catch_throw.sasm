@@ -1,0 +1,19 @@
+.type Error {
+}
+
+.func thrower -> i32
+  new_object Error
+  throw
+.end
+
+.func main -> i32
+.handler try_start try_end catch
+try_start:
+  call thrower
+try_end:
+  return
+catch:
+  pop
+  const_i32 42
+  return
+.end
